@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.ajstrand.itf_patterns.dummy.DummyContent;
+import com.example.ajstrand.itf_patterns.ITF_Pattern;
+
+
+
 
 /**
  * A fragment representing a single Pattern detail screen.
@@ -27,7 +30,13 @@ public class PatternDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    //private DummyContent.DummyItem mItem;
+
+    private ITF_Pattern.PatternItem myItem;
+
+    ITF_Pattern test = new ITF_Pattern();
+
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -40,16 +49,18 @@ public class PatternDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        test.setup();
+
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            myItem = ITF_Pattern.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(myItem.title);
             }
         }
     }
@@ -60,8 +71,8 @@ public class PatternDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.pattern_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.pattern_detail)).setText(mItem.details);
+        if (myItem != null) {
+            ((TextView) rootView.findViewById(R.id.pattern_detail)).setText(myItem.details);
         }
 
         return rootView;
