@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,18 +28,17 @@ public class ITF_Pattern {
 
     public ITF_Pattern(Context context) {
         this.context = context;
-
     }
 
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<ITF_Pattern.PatternItem> ITEMS = new ArrayList<ITF_Pattern.PatternItem>();
+    public final List<ITF_Pattern.PatternItem> ITEMS = new ArrayList<ITF_Pattern.PatternItem>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<String, ITF_Pattern.PatternItem>();
+    public final Map<String, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<String, ITF_Pattern.PatternItem>();
 
 
     public String loadJSON(){
@@ -68,10 +68,11 @@ public class ITF_Pattern {
 
 
            JSONObject  obj = new JSONObject(loadJSON());
-           JSONArray stepsArr = obj.getJSONArray("patternSteps");
-           String patternTitle = obj.getString("title");
+           JSONObject top = (JSONObject) obj.get("curPatternObj");
+           JSONObject stepsObj = top.getJSONObject("patternSteps");
+           String patternTitle = top.getString("title");
 
-           addItem(createPatternItem(testId, patternTitle, createStepsDetails(stepsArr)));
+           addItem(createPatternItem(testId, patternTitle, createStepsDetails(stepsObj)));
 
        }
        catch(JSONException e){
@@ -81,23 +82,29 @@ public class ITF_Pattern {
 
    }
 
-    protected static void addItem(PatternItem item) {
+    protected void addItem(PatternItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    protected static String createStepsDetails(JSONArray stepsArr)  {
+    protected static String createStepsDetails(JSONObject stepsObj)  {
         StringBuilder builder = new StringBuilder();
         builder.append("\nMore details information here.");
-        for(int i = 0;i<stepsArr.length();i++){
-            String item = null;
+
+        Iterator<String> iter = stepsObj.keys();
+
+        while(iter.hasNext()){
+            String key = iter.next();
             try {
-                item = stepsArr.getString(i);
-            } catch (JSONException e) {
+                Object value = stepsObj.get(key);
+                builder.append("Details about Item: ").append(value);
+
+            }
+            catch(JSONException e){
                 e.printStackTrace();
             }
-            builder.append("Details about Item: ").append(item);
         }
+
 
         return builder.toString();
     }
