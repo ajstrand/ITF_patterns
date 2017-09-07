@@ -33,54 +33,13 @@ public class ITF_Pattern {
     /**
      * An array of sample (dummy) items.
      */
-    public final List<ITF_Pattern.PatternItem> ITEMS = new ArrayList<ITF_Pattern.PatternItem>();
+    public static final List<ITF_Pattern.PatternItem> ITEMS = new ArrayList<ITF_Pattern.PatternItem>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
     public final Map<String, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<String, ITF_Pattern.PatternItem>();
 
-
-    public String loadJSON(){
-        String json = null;
-
-
-        try{
-            InputStream is = context.getAssets().open("chon-ji.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "utf-8");
-        }
-        catch (IOException e){
-            e.printStackTrace();
-            return null;
-        }
-        return json;
-
-    }
-
-   public void setup() {
-       try {
-
-           String testId = "1";
-
-
-           JSONObject  obj = new JSONObject(loadJSON());
-           JSONObject top = (JSONObject) obj.get("curPatternObj");
-           JSONObject stepsObj = top.getJSONObject("patternSteps");
-           String patternTitle = top.getString("title");
-
-           addItem(createPatternItem(testId, patternTitle, createStepsDetails(stepsObj)));
-
-       }
-       catch(JSONException e){
-        e.printStackTrace();
-
-       }
-
-   }
 
     protected void addItem(PatternItem item) {
         ITEMS.add(item);

@@ -28,10 +28,7 @@ public class PatternDetailFragment extends Fragment {
      */
     public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    //private DummyContent.DummyItem mItem;
+
 
     private ITF_Pattern.PatternItem myItem;
 
@@ -56,9 +53,8 @@ public class PatternDetailFragment extends Fragment {
 
         test = new ITF_Pattern(activity);
 
-        test.setup();
 
-        Log.d("something" , String.valueOf(test.ITEMS));
+
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
@@ -69,6 +65,7 @@ public class PatternDetailFragment extends Fragment {
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(myItem.title);
+
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.ajstrand.itf_patterns;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.example.ajstrand.itf_patterns.dummy.DummyContent;
+import com.example.ajstrand.itf_patterns.ITF_Pattern;
 
 import java.util.List;
 
@@ -44,6 +45,12 @@ public class PatternListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+        Context context = getApplicationContext();
+
+        ITF_Pattern test = new ITF_Pattern(context);
+
+        test.setup();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,15 +74,15 @@ public class PatternListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(ITF_Pattern.ITEMS));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<ITF_Pattern.PatternItem> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<ITF_Pattern.PatternItem> items) {
             mValues = items;
         }
 
@@ -90,7 +97,7 @@ public class PatternListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mContentView.setText(mValues.get(position).title);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -123,7 +130,7 @@ public class PatternListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
+            public ITF_Pattern.PatternItem mItem;
 
             public ViewHolder(View view) {
                 super(view);
