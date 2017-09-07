@@ -23,7 +23,8 @@ public class ParseJson extends AsyncTask<Void, String, String> {
         this.context = context;
     }
 
-    protected void onPostExecute(JSONObject json){
+
+    protected void onPostExecute(String json){
         try {
 
             String testId = "1";
@@ -34,7 +35,7 @@ public class ParseJson extends AsyncTask<Void, String, String> {
             JSONObject stepsObj = top.getJSONObject("patternSteps");
             String patternTitle = top.getString("title");
 
-            patternStuff.addItem(patternStuff.createPatternItem(testId, patternTitle, createStepsDetails(stepsObj)));
+            patternStuff.addItem(patternStuff.createPatternItem(testId, patternTitle, patternStuff.createStepsDetails(stepsObj)));
 
         }
         catch(JSONException e){
@@ -45,7 +46,7 @@ public class ParseJson extends AsyncTask<Void, String, String> {
     @Override
     protected String doInBackground(Void... params) {
 
-        String json = null;
+        String json;
 
 
         try{

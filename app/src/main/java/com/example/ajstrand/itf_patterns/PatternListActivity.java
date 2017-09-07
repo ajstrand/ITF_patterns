@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.ajstrand.itf_patterns.ITF_Pattern;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -47,9 +49,10 @@ public class PatternListActivity extends AppCompatActivity {
 
         Context context = getApplicationContext();
 
-        ITF_Pattern test = new ITF_Pattern(context);
 
-        test.setup();
+        ParseJson task = new ParseJson(context);
+        task.execute();
+        
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

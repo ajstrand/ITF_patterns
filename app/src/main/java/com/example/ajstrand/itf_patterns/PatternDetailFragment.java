@@ -32,7 +32,15 @@ public class PatternDetailFragment extends Fragment {
 
     private ITF_Pattern.PatternItem myItem;
 
-    ITF_Pattern test;
+
+    //ItemSelectedListener mCallback;
+
+
+    /*public interface ItemSelectedListener {
+        public void onArticleSelected(int position);
+    }*/
+
+
 
 
 
@@ -51,16 +59,13 @@ public class PatternDetailFragment extends Fragment {
         Activity activity = this.getActivity();
 
 
-        test = new ITF_Pattern(activity);
-
-
 
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            myItem = test.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            myItem = ITF_Pattern.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {

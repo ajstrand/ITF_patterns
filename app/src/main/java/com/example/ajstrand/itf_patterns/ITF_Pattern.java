@@ -38,7 +38,7 @@ public class ITF_Pattern {
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public final Map<String, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<String, ITF_Pattern.PatternItem>();
+    public static final Map<String, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<String, ITF_Pattern.PatternItem>();
 
 
     protected void addItem(PatternItem item) {
