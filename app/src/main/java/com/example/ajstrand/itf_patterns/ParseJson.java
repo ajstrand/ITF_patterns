@@ -50,19 +50,21 @@ public class ParseJson extends AsyncTask<Void, String, ArrayList<String>> {
     protected ArrayList<String> doInBackground(Void... params) {
 
         ArrayList<String> jsonFiles = new ArrayList<String>();
-        String dirName = "";
+        String dirName = "jsonFiles";
         AssetManager am = context.getAssets();
         try {
             String filesList[] = am.list(dirName);
             for(int i = 0; i< filesList.length;i++){
+                String file = filesList[i];
                 String temp = null;
-                InputStream is = am.open(filesList[i]);
+                InputStream is = am.open(filesList[4]);
                 int size = is.available();
                 byte[] buffer = new byte[size];
                 is.read(buffer);
                 is.close();
                 temp = new String(buffer, "utf-8");
                 jsonFiles.add(i, temp);
+                System.out.println("added file");
 
             }
         } catch (IOException e) {
