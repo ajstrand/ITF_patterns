@@ -32,18 +32,6 @@ public class PatternDetailFragment extends Fragment {
 
     private ITF_Pattern.PatternItem myItem;
 
-
-    //ItemSelectedListener mCallback;
-
-
-    /*public interface ItemSelectedListener {
-        public void onArticleSelected(int position);
-    }*/
-
-
-
-
-
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
