@@ -107,7 +107,7 @@ public class PatternListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(PatternDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        arguments.putInt(PatternDetailFragment.ARG_ITEM_ID, holder.mItem.id);
                         PatternDetailFragment fragment = new PatternDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()

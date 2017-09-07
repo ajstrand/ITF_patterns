@@ -38,7 +38,7 @@ public class ITF_Pattern {
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<String, ITF_Pattern.PatternItem>();
+    public static final Map<Integer, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<Integer, ITF_Pattern.PatternItem>();
 
 
     protected void addItem(PatternItem item) {
@@ -68,17 +68,17 @@ public class ITF_Pattern {
         return builder.toString();
     }
 
-    protected static PatternItem createPatternItem(String id, String title, String steps) {
-        return new PatternItem(String.valueOf(id), title, steps);
+    protected static PatternItem createPatternItem(int id, String title, String steps) {
+        return new PatternItem(id, title, steps);
     }
 
     public static class PatternItem {
 
-        public final String id;
+        public final int id;
         public final String title;
         public final String details;
 
-        public PatternItem(String id, String title, String details) {
+        public PatternItem(int id, String title, String details) {
             this.id = id;
             this.title = title;
             this.details = details;
