@@ -48,7 +48,7 @@ public class ITF_Pattern {
 
     protected static String createStepsDetails(JSONObject stepsObj)  {
         StringBuilder builder = new StringBuilder();
-        builder.append("\nMore details information here.");
+        builder.append("\nDetails about the pattern:\n");
 
         Iterator<String> iter = stepsObj.keys();
 
@@ -56,7 +56,7 @@ public class ITF_Pattern {
             String key = iter.next();
             try {
                 Object value = stepsObj.get(key);
-                builder.append("Details about Item: ").append(value);
+                builder.append(value+"\n");
 
             }
             catch(JSONException e){
@@ -69,7 +69,7 @@ public class ITF_Pattern {
     }
 
     protected static PatternItem createPatternItem(String id, String title, String steps) {
-        return new PatternItem(String.valueOf(id), "Item " + id, steps);
+        return new PatternItem(String.valueOf(id), title, steps);
     }
 
     public static class PatternItem {

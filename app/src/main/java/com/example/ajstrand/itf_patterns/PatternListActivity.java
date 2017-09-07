@@ -52,7 +52,7 @@ public class PatternListActivity extends AppCompatActivity {
 
         ParseJson task = new ParseJson(context);
         task.execute();
-        
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
