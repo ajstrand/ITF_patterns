@@ -99,7 +99,7 @@ public class PatternListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).id);
+            holder.mIdView.setText(String.valueOf(mValues.get(position).id));
             holder.mContentView.setText(mValues.get(position).title);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +107,7 @@ public class PatternListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(PatternDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        arguments.putInt(PatternDetailFragment.ARG_ITEM_ID, holder.mItem.id);
                         PatternDetailFragment fragment = new PatternDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
