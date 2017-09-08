@@ -30,14 +30,10 @@ public class ITF_Pattern {
         this.context = context;
     }
 
-    /**
-     * An array of sample (dummy) items.
-     */
+
     public static final List<ITF_Pattern.PatternItem> ITEMS = new ArrayList<ITF_Pattern.PatternItem>();
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
+
     public static final Map<Integer, ITF_Pattern.PatternItem> ITEM_MAP = new HashMap<Integer, ITF_Pattern.PatternItem>();
 
 

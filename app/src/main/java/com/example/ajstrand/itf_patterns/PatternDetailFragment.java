@@ -50,9 +50,6 @@ public class PatternDetailFragment extends Fragment {
 
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
             Bundle test = activity.getIntent().getExtras();
 
             Integer myID = test.getInt("item_id");
@@ -71,7 +68,6 @@ public class PatternDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.pattern_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
         if (myItem != null) {
             ((TextView) rootView.findViewById(R.id.pattern_detail)).setText(myItem.details);
         }
