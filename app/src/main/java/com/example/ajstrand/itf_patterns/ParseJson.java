@@ -57,7 +57,7 @@ public class ParseJson extends AsyncTask<Void, String, ArrayList<String>> {
             for(int i = 0; i< filesList.length;i++){
                 String file = filesList[i];
                 String temp = null;
-                InputStream is = am.open(filesList[4]);
+                InputStream is = am.open(dirName+"/"+file);
                 int size = is.available();
                 byte[] buffer = new byte[size];
                 is.read(buffer);

@@ -30,6 +30,7 @@ public class PatternDetailFragment extends Fragment {
 
 
 
+
     private ITF_Pattern.PatternItem myItem;
 
     /**
@@ -48,12 +49,12 @@ public class PatternDetailFragment extends Fragment {
 
 
 
-
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            myItem = ITF_Pattern.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            Integer localID = getArguments().getInt(ARG_ITEM_ID);
+            myItem = ITF_Pattern.ITEM_MAP.get(localID);
 
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
