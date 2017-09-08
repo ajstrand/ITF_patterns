@@ -53,8 +53,10 @@ public class PatternDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            Integer localID = getArguments().getInt(ARG_ITEM_ID);
-            myItem = ITF_Pattern.ITEM_MAP.get(localID);
+            Bundle test = activity.getIntent().getExtras();
+
+            Integer myID = test.getInt("item_id");
+            myItem = ITF_Pattern.ITEM_MAP.get(myID);
 
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
