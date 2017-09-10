@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -28,8 +29,15 @@ public class SwitchTheme extends AppCompatActivity {
 
 
         if(useDarkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             setTheme(R.style.AppTheme_Dark_NoActionBar);
         }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            setTheme(R.style.AppTheme_NoActionBar);
+        }
+
+
 
         Switch toggle = (Switch) findViewById(R.id.switch1);
         toggle.setChecked(useDarkTheme);
@@ -37,6 +45,7 @@ public class SwitchTheme extends AppCompatActivity {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                SwitchTheme.super.recreate();
                 toggleTheme(isChecked);
             }
         });
