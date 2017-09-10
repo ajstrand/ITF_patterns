@@ -20,6 +20,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
@@ -39,6 +40,9 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
+
+    private static final String PREFS_NAME = "prefs";
+    private static final String PREF_DARK_THEME = "dark_theme";
 
 
 
@@ -128,8 +132,46 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // Use the chosen theme
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
+
+
+        if(useDarkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            setTheme(R.style.AppTheme_NoActionBar);
+        }
+
+
+
+        Switch toggle = (Switch) findViewById(R.id.switch1);
+        toggle.setChecked(useDarkTheme);
+
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
+                SettingsActivity.super.recreate();
+                toggleTheme(isChecked);
+            }
+        });
+
         super.onCreate(savedInstanceState);
         setupActionBar();
+    }
+
+    private void toggleTheme(boolean darkTheme) {
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putBoolean(PREF_DARK_THEME, darkTheme);
+        editor.apply();
+
+        Intent intent = getIntent();
+        finish();
+
+        startActivity(intent);
     }
 
 

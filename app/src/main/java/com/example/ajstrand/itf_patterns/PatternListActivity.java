@@ -45,6 +45,13 @@ public class PatternListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        int  mode = AppCompatDelegate.getDefaultNightMode();
+
+        if (mode == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
+        }
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern_list);
