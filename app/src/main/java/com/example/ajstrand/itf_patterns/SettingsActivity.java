@@ -24,7 +24,6 @@ import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import java.util.List;
 
@@ -148,8 +147,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
 
-        Switch toggle = (Switch) findViewById(R.id.switch1);
-        toggle.setChecked(useDarkTheme);
+
 
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -239,7 +237,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                startActivity(new Intent(getActivity(), PatternListActivity.class));
                 return true;
             }
             return super.onOptionsItemSelected(item);
