@@ -4,7 +4,6 @@ package com.example.ajstrand.itf_patterns;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -14,16 +13,15 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
+
+import com.example.ajstrand.itf_patterns.SettingsFragment.OnFragmentInteractionListener;
+
 
 import java.util.List;
 
@@ -38,10 +36,9 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends AppCompatPreferenceActivity implements OnFragmentInteractionListener {
 
-    private static final String PREFS_NAME = "prefs";
-    private static final String PREF_DARK_THEME = "dark_theme";
+
 
 
 
@@ -131,46 +128,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // Use the chosen theme
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
-
-
-        if(useDarkTheme) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            setTheme(R.style.AppTheme_Dark_NoActionBar);
-        }
-        else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            setTheme(R.style.AppTheme_NoActionBar);
-        }
-
-
-
-
-
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                SettingsActivity.super.recreate();
-                toggleTheme(isChecked);
-            }
-        });
-
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings); // your layout XML here
+
+
+        // Insert the settings fragment in the FrameLayout we added earlier
+        getFragmentManager().beginTransaction()
+                .replace(R.id.content, new SettingsFragment())
+                .commit();
         setupActionBar();
     }
 
-    private void toggleTheme(boolean darkTheme) {
-        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-        editor.putBoolean(PREF_DARK_THEME, darkTheme);
-        editor.apply();
-
-        Intent intent = getIntent();
-        finish();
-
-        startActivity(intent);
-    }
 
 
 
@@ -211,6 +179,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
                 || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
                 || NotificationPreferenceFragment.class.getName().equals(fragmentName);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     /**
@@ -302,5 +275,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+
+
     }
 }
