@@ -81,7 +81,7 @@ public class SwitchTheme extends AppCompatActivity {
     }
 
     private void setMessage(){
-        Toast.makeText(this, "Enabling dark mode requires a restart", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Switching themes requires a restart", Toast.LENGTH_SHORT).show();
     }
 
     @Override
