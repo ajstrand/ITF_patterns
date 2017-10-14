@@ -81,7 +81,8 @@ public class SwitchTheme extends AppCompatActivity {
     }
 
     private void setMessage(){
-        Toast.makeText(this, "Switching themes requires a restart", Toast.LENGTH_SHORT).show();
+        String message = "Switching themes requires a restart";
+        Toast.makeText(this, message , Toast.LENGTH_SHORT).show();
     }
 
     @Override
