@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatDelegate;
+import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -38,8 +42,28 @@ public class PatternListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
 
+    private static final String PREFS_NAME = "prefs";
+    private static final String PREF_DARK_THEME = "dark_theme";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Use the chosen theme
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
+
+
+        if(useDarkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            setTheme(R.style.AppTheme_NoActionBar);
+        }
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern_list);
 
@@ -47,7 +71,7 @@ public class PatternListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        Context context = getApplicationContext();
+        final Context context = getApplicationContext();
 
 
         ParseJson task = new ParseJson(context);
@@ -58,8 +82,8 @@ public class PatternListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(context, SwitchTheme.class);
+                startActivity(intent);
             }
         });
 
