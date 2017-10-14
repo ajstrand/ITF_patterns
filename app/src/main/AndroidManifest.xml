@@ -29,9 +29,6 @@
                 android:value="com.example.ajstrand.itf_patterns.PatternListActivity" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
             android:name=".SwitchTheme"
             android:label="@string/title_activity_switch_theme"
             android:theme="@style/AppTheme.NoActionBar"

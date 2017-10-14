@@ -42,13 +42,24 @@ public class PatternListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
 
+    private static final String PREFS_NAME = "prefs";
+    private static final String PREF_DARK_THEME = "dark_theme";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        int  mode = AppCompatDelegate.getDefaultNightMode();
+        // Use the chosen theme
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
-        if (mode == AppCompatDelegate.MODE_NIGHT_YES) {
+
+        if(useDarkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             setTheme(R.style.AppTheme_Dark_NoActionBar);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            setTheme(R.style.AppTheme_NoActionBar);
         }
 
 
@@ -71,10 +82,7 @@ public class PatternListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                Intent intent = new Intent(context, SettingsActivity.class);
+                Intent intent = new Intent(context, SwitchTheme.class);
                 startActivity(intent);
             }
         });

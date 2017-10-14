@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class SwitchTheme extends AppCompatActivity {
 
@@ -51,6 +52,7 @@ public class SwitchTheme extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 SwitchTheme.super.recreate();
                 toggleTheme(isChecked);
+                setMessage();
             }
         });
         super.onCreate(savedInstanceState);
@@ -76,6 +78,10 @@ public class SwitchTheme extends AppCompatActivity {
         finish();
 
         startActivity(intent);
+    }
+
+    private void setMessage(){
+        Toast.makeText(this, "Enabling dark mode requires a restart", Toast.LENGTH_SHORT).show();
     }
 
     @Override
