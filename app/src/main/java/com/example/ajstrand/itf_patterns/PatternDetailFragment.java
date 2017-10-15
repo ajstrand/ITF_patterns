@@ -1,9 +1,15 @@
 package com.example.ajstrand.itf_patterns;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +18,7 @@ import android.widget.TextView;
 
 import com.example.ajstrand.itf_patterns.ITF_Pattern;
 
-
+import static android.R.attr.button;
 
 
 /**
@@ -33,6 +39,8 @@ public class PatternDetailFragment extends Fragment {
 
     private ITF_Pattern.PatternItem myItem;
 
+
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -46,6 +54,9 @@ public class PatternDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Activity activity = this.getActivity();
+
+
+
 
 
 
