@@ -16,24 +16,41 @@ import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
+import com.example.ajstrand.itf_patterns.ITF_Pattern;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CreateNotificationDetailsFragment extends Fragment {
+public class CreateNotificationDetailsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 
     Context context;
+
+    List<ITF_Pattern.PatternItem> foo = ITF_Pattern.ITEMS;
+
+    ArrayList<String> fooBar = new ArrayList<>();
+
+    String note, pattern_name;
+
+
+
 
 
     /**
      * @method sendNotification
      */
     public void sendNotification() {
-        Toast.makeText(getContext(), "hiiiiiii", Toast.LENGTH_SHORT).show();
-        Notification myNot = getNotification("helllllo");
+        Toast.makeText(getContext(), "sending notification about "+ pattern_name, Toast.LENGTH_SHORT).show();
+        Notification myNot = getNotification(note);
         scheduleNotification(myNot, 6000);
     }
 
@@ -77,11 +94,38 @@ public class CreateNotificationDetailsFragment extends Fragment {
                 sendNotification();
             }
         });
+
+        for(int i = 0; i<foo.size(); i++){
+            ITF_Pattern.PatternItem test = foo.get(i);
+            fooBar.add(test.title);
+        }
+
+        Spinner spinner = (Spinner) v.findViewById(R.id.my_spinner);
+        spinner.setOnItemSelectedListener(this);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter adapter;
+        adapter = new ArrayAdapter <String> (context, android.R.layout.simple_spinner_item, fooBar);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
         return v;
     }
 
     public void onAttach(Context con){
     super.onAttach(con);
     context = con;
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        note = "dont forget to pratice "+ parent.getItemAtPosition(pos).toString();
+        pattern_name = parent.getItemAtPosition(pos).toString();
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 }
