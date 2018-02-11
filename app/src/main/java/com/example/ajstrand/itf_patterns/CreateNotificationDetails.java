@@ -1,12 +1,18 @@
 package com.example.ajstrand.itf_patterns;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class CreateNotificationDetails extends AppCompatActivity {
 
@@ -18,24 +24,20 @@ public class CreateNotificationDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.ttt, CreateNotificationDetailsFragment).commit();
+            // Create the detail fragment and add it to the activity
+            // using a fragment transaction.
+            Bundle arguments = new Bundle();
+            CreateNotificationDetailsFragment fragment = new CreateNotificationDetailsFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.ttt, new CreateNotificationDetailsFragment()).commit();
         }
 
-// Capture the layout's TextView and set the string as its text
-        TextView textView = (TextView) findViewById(R.id.hi);
-        String message = getString(R.string.sendNotification);
-        textView.setText(message);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
     }
+
+
 
 }

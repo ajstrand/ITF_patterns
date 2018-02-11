@@ -1,9 +1,14 @@
 package com.example.ajstrand.itf_patterns;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -11,46 +16,72 @@ import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class CreateNotificationDetailsFragment extends Fragment {
 
-    private View view;
 
-    public CreateNotificationDetailsFragment() {
+    Context context;
+
+
+    /**
+     * @method sendNotification
+     */
+    public void sendNotification() {
+        Toast.makeText(getContext(), "hiiiiiii", Toast.LENGTH_SHORT).show();
+        Notification myNot = getNotification("helllllo");
+        scheduleNotification(myNot, 6000);
     }
 
-    public void sendNot(View view){
+    private void scheduleNotification(Notification notification, int delay) {
+        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Context con = this.getActivity();
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(con)
-                        .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle("My notification")
-                        .setContentText("a test notification");
-
-
-        //
-
-        // Gets an instance of the NotificationManager service//
-
-        NotificationManager mNotificationManager = (NotificationManager) con.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        //When you issue multiple notifications about the same type of event, it’s best practice for your app to try to update an existing notification with this new information, rather than immediately creating a new notification. If you want to update this notification at a later date, you need to assign it an ID. You can then use this ID whenever you issue a subsequent notification. If the previous notification is still visible, the system will update this existing notification, rather than create a new one. In this example, the notification’s ID is 001//
-
-        //mNotificationManager.notify().
-
-        mNotificationManager.notify(001, mBuilder.build());
-
-        this.view = view;
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
     }
+
+    private Notification getNotification(String content) {
+        if(context == null){
+            throw new Error("context is null, please check the value " + content);
+        }
+        else {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+            builder.setContentTitle("Scheduled Notification");
+            builder.setContentText(content);
+            builder.setSmallIcon(R.drawable.ic_launcher);
+            return builder.build();
+        }
+
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_create_notification_details, container, false);
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_create_notification_details, container, false);
+        Button testButton;
+        testButton = (Button) v.findViewById(R.id.myid);
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendNotification();
+            }
+        });
+        return v;
+    }
+
+    public void onAttach(Context con){
+    super.onAttach(con);
+    context = con;
     }
 }

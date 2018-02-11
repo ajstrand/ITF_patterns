@@ -131,4 +131,7 @@ public class PatternDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void sendNotification(View view) {
+    }
 }

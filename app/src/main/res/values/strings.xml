@@ -10,7 +10,7 @@
 
     <string name="toggle_theme">Toggle Theme</string>
 
-    <string name="sendNotification">Send Notification</string>
+    <string name="sendNotification">Send Notification from my phone</string>
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 

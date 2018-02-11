@@ -7,15 +7,15 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="20dp"
         android:id="@+id/hi"
         android:text="yoooo"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sendNotification"
-        android:id="@+id/myid"
-        android:onClick="sendNot" />
+        android:id="@+id/sendPatternNotification"
+        android:onClick="sendNotification"/>
 
 </LinearLayout>

@@ -43,6 +43,13 @@
             android:name=".CreateNotificationDetails"
             android:label="@string/title_activity_create_notification_details"
             android:theme="@style/AppTheme.NoActionBar" />
-    </application>
+        <receiver android:name=".NotificationPublisher"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>    </application>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
 </manifest>
