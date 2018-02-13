@@ -1,28 +1,22 @@
 package com.example.ajstrand.itf_patterns;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.SystemClock;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-import com.example.ajstrand.itf_patterns.ITF_Pattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +36,11 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
     String note, pattern_name;
 
 
-
-
-
     /**
      * @method sendNotification
      */
     public void sendNotification() {
-        Toast.makeText(getContext(), "sending notification about "+ pattern_name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "sending notification about " + pattern_name, Toast.LENGTH_SHORT).show();
         Notification myNot = getNotification(note);
         scheduleNotification(myNot, 6000);
     }
@@ -66,10 +57,9 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
     }
 
     private Notification getNotification(String content) {
-        if(context == null){
+        if (context == null) {
             throw new Error("context is null, please check the value " + content);
-        }
-        else {
+        } else {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
             builder.setContentTitle("Scheduled Notification");
             builder.setContentText(content);
@@ -78,7 +68,6 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
         }
 
     }
-
 
 
     @Override
@@ -95,7 +84,7 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
             }
         });
 
-        for(int i = 0; i<foo.size(); i++){
+        for (int i = 0; i < foo.size(); i++) {
             ITF_Pattern.PatternItem test = foo.get(i);
             fooBar.add(test.title);
         }
@@ -104,7 +93,7 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
         spinner.setOnItemSelectedListener(this);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter;
-        adapter = new ArrayAdapter <String> (context, android.R.layout.simple_spinner_item, fooBar);
+        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, fooBar);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
@@ -112,14 +101,14 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
         return v;
     }
 
-    public void onAttach(Context con){
-    super.onAttach(con);
-    context = con;
+    public void onAttach(Context con) {
+        super.onAttach(con);
+        context = con;
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
-        note = "dont forget to pratice "+ parent.getItemAtPosition(pos).toString();
+        note = "dont forget to pratice " + parent.getItemAtPosition(pos).toString();
         pattern_name = parent.getItemAtPosition(pos).toString();
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
