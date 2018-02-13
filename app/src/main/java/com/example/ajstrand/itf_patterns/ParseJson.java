@@ -38,7 +38,7 @@ public class ParseJson extends AsyncTask<Void, String, ArrayList<String>> {
                 JSONObject stepsObj = top.getJSONObject("patternSteps");
                 String patternTitle = top.getString("title");
 
-                patternStuff.addItem(patternStuff.createPatternItem(id, patternTitle, patternStuff.createStepsDetails(stepsObj)));
+                patternStuff.addItem(ITF_Pattern.createPatternItem(id, patternTitle, ITF_Pattern.createStepsDetails(stepsObj)));
             }
         }
         catch(JSONException e){

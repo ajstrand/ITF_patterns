@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatDelegate;
@@ -28,6 +29,7 @@ import com.example.ajstrand.itf_patterns.ITF_Pattern;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +47,8 @@ public class PatternListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+
+    FragmentManager passValue = getSupportFragmentManager();
 
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_DARK_THEME = "dark_theme";
@@ -78,6 +82,7 @@ public class PatternListActivity extends AppCompatActivity {
         final Context context = getApplicationContext();
 
 
+
         ParseJson task = new ParseJson(context);
         task.execute();
 
@@ -105,72 +110,8 @@ public class PatternListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(ITF_Pattern.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(ITF_Pattern.ITEMS, mTwoPane, passValue));
     }
 
-    public class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<ITF_Pattern.PatternItem> mValues;
-
-        public SimpleItemRecyclerViewAdapter(List<ITF_Pattern.PatternItem> items) {
-            mValues = items;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.pattern_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mItem = mValues.get(position);
-            holder.mContentView.setText(mValues.get(position).title);
-
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mTwoPane) {
-                        Bundle arguments = new Bundle();
-                        arguments.putInt(PatternDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-                        PatternDetailFragment fragment = new PatternDetailFragment();
-                        fragment.setArguments(arguments);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.pattern_detail_container, fragment)
-                                .commit();
-                    } else {
-                        Context context = v.getContext();
-                        Intent intent = new Intent(context, PatternDetailActivity.class);
-                        intent.putExtra(PatternDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-
-                        context.startActivity(intent);
-                    }
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mContentView;
-            public ITF_Pattern.PatternItem mItem;
-
-            public ViewHolder(View view) {
-                super(view);
-                mView = view;
-                mContentView = (TextView) view.findViewById(R.id.content);
-            }
-
-            @Override
-            public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
-            }
-        }
-    }
 }
