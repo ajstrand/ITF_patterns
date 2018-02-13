@@ -31,14 +31,25 @@
         <activity
             android:name=".SwitchTheme"
             android:label="@string/title_activity_switch_theme"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".PatternListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
-            android:parentActivityName="com.example.ajstrand.itf_patterns.PatternListActivity" >
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ajstrand.itf_patterns.PatternListActivity" />
         </activity>
-    </application>
+        <activity
+            android:name=".CreateNotificationDetails"
+            android:label="@string/title_activity_create_notification_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <receiver android:name=".NotificationPublisher"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>    </application>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
 </manifest>

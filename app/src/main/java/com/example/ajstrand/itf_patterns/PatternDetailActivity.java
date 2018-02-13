@@ -1,9 +1,15 @@
 package com.example.ajstrand.itf_patterns;
 
+import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
@@ -63,6 +69,52 @@ public class PatternDetailActivity extends AppCompatActivity {
         }
     }
 
+    public void sendToCreateView(View view){
+        Context con = this.getApplicationContext();
+
+        Intent intent = new Intent(con, CreateNotificationDetails.class);
+        startActivity(intent);
+
+        /*NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(con)
+                        .setSmallIcon(R.drawable.notification_icon)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!");
+
+        // Creates an explicit intent for an Activity in your app
+        Intent resultIntent = new Intent(con, CreateNotificationDetails.class);
+
+// The stack builder object will contain an artificial back stack for the
+// started Activity.
+// This ensures that navigating backward from the Activity leads out of
+// your application to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(con);
+// Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(CreateNotificationDetails.class);
+// Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+
+
+        //
+
+        // Gets an instance of the NotificationManager service//
+
+        NotificationManager mNotificationManager = (NotificationManager) con.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        //When you issue multiple notifications about the same type of event, it’s best practice for your app to try to update an existing notification with this new information, rather than immediately creating a new notification. If you want to update this notification at a later date, you need to assign it an ID. You can then use this ID whenever you issue a subsequent notification. If the previous notification is still visible, the system will update this existing notification, rather than create a new one. In this example, the notification’s ID is 001//
+
+        //mNotificationManager.notify().
+
+        mNotificationManager.notify(001, mBuilder.build());*/
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -78,5 +130,8 @@ public class PatternDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sendNotification(View view) {
     }
 }
