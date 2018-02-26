@@ -26,6 +26,13 @@ import android.widget.TextView;
 
 
 import com.example.ajstrand.itf_patterns.ITF_Pattern;
+import com.facebook.litho.Component;
+import com.facebook.litho.ComponentContext;
+import com.facebook.litho.LithoView;
+import com.facebook.litho.sections.SectionContext;
+import com.facebook.litho.sections.widget.RecyclerCollectionComponent;
+import com.facebook.litho.widget.LithoRecylerView;
+import com.facebook.soloader.SoLoader;
 
 import org.json.JSONObject;
 
@@ -70,6 +77,7 @@ public class PatternListActivity extends AppCompatActivity {
             setTheme(R.style.AppTheme_NoActionBar);
         }
 
+        SoLoader.init(this, false);
 
 
         super.onCreate(savedInstanceState);
@@ -86,19 +94,9 @@ public class PatternListActivity extends AppCompatActivity {
         ParseJson task = new ParseJson(context);
         task.execute();
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, SwitchTheme.class);
-                startActivity(intent);
-            }
-        });
-
-        View recyclerView = findViewById(R.id.pattern_list);
+        /*View recyclerView = findViewById(R.id.pattern_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        setupRecyclerView((RecyclerView) recyclerView);*/
 
         if (findViewById(R.id.pattern_detail_container) != null) {
             // The detail container view will be present only in the
@@ -107,11 +105,23 @@ public class PatternListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+        final ComponentContext newCont = new ComponentContext(this);
+
+        final Component component = RecyclerCollectionComponent.create(newCont)
+                .disablePTR(true)
+                .section(PatternSection.create(new SectionContext(context))
+                        .twoPane(mTwoPane)
+                        .manage(passValue)
+                        .build())
+                .build();
+        setContentView(LithoView.create(context, component));
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(ITF_Pattern.ITEMS, mTwoPane, passValue));
     }
+
+
 
 
 }

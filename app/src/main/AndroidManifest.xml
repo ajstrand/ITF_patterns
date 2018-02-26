@@ -54,7 +54,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Rec_Adapter"></activity>
+        <activity android:name=".Rec_Adapter" />
     </application>
 
 </manifest>

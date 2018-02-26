@@ -1,10 +1,8 @@
 package com.example.ajstrand.itf_patterns;
 
-import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,13 +22,9 @@ public class SimpleItemRecyclerViewAdapter
 
     private final List<ITF_Pattern.PatternItem> mValues;
 
-    private ArrayList<String> foo = new ArrayList<String>(0);
 
 
     protected SimpleItemRecyclerViewAdapter(List<ITF_Pattern.PatternItem> items, boolean mTwoPane, FragmentManager context) {
-        foo.add("one");
-        foo.add("two");
-        foo.add("three");
         mValues = items;
         twoPane = mTwoPane;
         con = context;
