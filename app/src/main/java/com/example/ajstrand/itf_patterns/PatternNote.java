@@ -11,13 +11,31 @@ import android.support.annotation.NonNull;
 @Entity
 public class PatternNote {
     @PrimaryKey
-    public final int id;
-    public final String name;
-    public final String text;
+    public int id;
+    public String name;
+    public String text;
 
     public PatternNote(int id, String name, String text) {
         this.id = id;
         this.name = name;
         this.text = text;
+    }
+
+    public int getID(){return this.id;}
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setText(String text){
+        this.text = text;
+    }
+
+    public String getText() {
+        return this.text;
     }
 }

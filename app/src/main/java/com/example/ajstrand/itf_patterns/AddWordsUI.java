@@ -1,6 +1,13 @@
 package com.example.ajstrand.itf_patterns;
 
+import android.app.Activity;
+import android.app.Application;
+import android.app.Fragment;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +22,10 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class AddWordsUI extends AppCompatActivity {
+public class AddWordsUI<T extends ViewModel> extends AppCompatActivity implements LifecycleOwner {
 
     private PatternNoteViewModel mPatternViewModel;
+
 
     public static final int NEW_PATTERN_ACTIVITY_REQUEST_CODE = 1;
 
@@ -45,7 +53,7 @@ public class AddWordsUI extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         adapter = new NotesList(this);
-        //mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +63,10 @@ public class AddWordsUI extends AppCompatActivity {
                 startActivityForResult(intent, NEW_PATTERN_ACTIVITY_REQUEST_CODE);
             }
         });
+
         mPatternViewModel = ViewModelProviders.of(this).get(PatternNoteViewModel.class);
+
+
 
         mPatternViewModel.getPatternNotes().observe(this, new Observer<List<PatternNote>>() {
             @Override

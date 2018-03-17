@@ -11,8 +11,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
     import android.os.AsyncTask;
     import android.support.annotation.NonNull;
-
-    @Database(entities = { PatternNote.class }, version = 1)
+    @Database(entities = { PatternNote.class }, version = 1, exportSchema = false)
     public abstract class PatternNoteDatabase extends RoomDatabase {
 
         private static final String DB_NAME = "patternNoteDatabase.db";
@@ -29,7 +28,6 @@ import android.content.Context;
             return Room.databaseBuilder(
                     context,
                     PatternNoteDatabase.class,
-
                     DB_NAME)
                     .addCallback(sRoomDatabaseCallback)
                     .build();
@@ -59,7 +57,9 @@ import android.content.Context;
             protected Void doInBackground(final Void... params) {
                 mDao.deleteAll();
                 PatternNote note = new PatternNote(0, "test", "this is a note");
+                PatternNote second = new PatternNote(1, "foo", "bar");
                 mDao.insert(note);
+                mDao.insert(second);
                 return null;
             }
         }

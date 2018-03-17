@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface PatternNoteDao {
 
-    @Query("SELECT * FROM repo")
+    @Query("SELECT * FROM patternnote")
     LiveData<List<PatternNote>> getAllNotes();
 
     @Insert
@@ -27,6 +27,6 @@ public interface PatternNoteDao {
     @Delete
     void delete(PatternNote... notes);
 
-    @Query("DELETE FROM note_table")
+    @Query("DELETE FROM patternnote")
     void deleteAll();
 }

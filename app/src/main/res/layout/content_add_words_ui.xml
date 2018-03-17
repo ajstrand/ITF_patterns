@@ -8,4 +8,11 @@
     tools:context="com.example.ajstrand.itf_patterns.AddWordsUI"
     tools:showIn="@layout/activity_add_words_ui">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"
+        tools:listitem="@layout/content_notes_list" />
+
 </android.support.constraint.ConstraintLayout>
