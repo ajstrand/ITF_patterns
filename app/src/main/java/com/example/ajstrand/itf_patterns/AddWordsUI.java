@@ -30,7 +30,7 @@ public class AddWordsUI<T extends ViewModel> extends AppCompatActivity implement
     public static final int NEW_PATTERN_ACTIVITY_REQUEST_CODE = 1;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter adapter;
+    private NotesList adapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
@@ -72,7 +72,7 @@ public class AddWordsUI<T extends ViewModel> extends AppCompatActivity implement
             @Override
             public void onChanged(@Nullable final List<PatternNote> notes) {
                 // Update the cached copy of the words in the adapter.
-                adapter.notifyDataSetChanged();
+                    adapter.setPatternNotes(notes);
             }
         });
 
@@ -84,6 +84,7 @@ public class AddWordsUI<T extends ViewModel> extends AppCompatActivity implement
         if (requestCode == NEW_PATTERN_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             PatternNote word = new PatternNote(0, data.getStringExtra(NewPatternNote.EXTRA_REPLY), "test");
             mPatternViewModel.insert(word);
+            Toast.makeText(getApplicationContext(), word.toString(), Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(
                     getApplicationContext(),

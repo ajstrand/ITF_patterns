@@ -10,12 +10,12 @@ import android.support.annotation.NonNull;
 
 @Entity
 public class PatternNote {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
     public String name;
     public String text;
 
-    public PatternNote(int id, String name, String text) {
+    PatternNote(int id, String name, String text) {
         this.id = id;
         this.name = name;
         this.text = text;
