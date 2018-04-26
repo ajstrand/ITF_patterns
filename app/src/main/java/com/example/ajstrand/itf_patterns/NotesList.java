@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -27,10 +28,16 @@ public class NotesList extends RecyclerView.Adapter<NotesList.NoteViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(NotesList.NoteViewHolder holder, int position) {
+    public void onBindViewHolder(final NotesList.NoteViewHolder holder, int position) {
         if (mNotes != null) {
             PatternNote current = mNotes.get(position);
             holder.wordItemView.setText(current.name);
+            holder.wordItemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(holder.wordItemView.getContext(),"clicked", Toast.LENGTH_LONG).show();
+                }
+            });
         } else {
             // Covers the case of data not being ready yet.
             holder.wordItemView.setText("No notes");

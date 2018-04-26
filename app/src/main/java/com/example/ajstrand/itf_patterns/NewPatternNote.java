@@ -25,9 +25,9 @@ public class NewPatternNote extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mEditNameView = findViewById(R.id.edit_word);
+        mEditNameView = findViewById(R.id.edit_title);
 
-        //mEditTextView = findViewById(R.id.edit_note_text);
+        mEditTextView = findViewById(R.id.edit_content);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
@@ -36,8 +36,12 @@ public class NewPatternNote extends AppCompatActivity {
                 if (TextUtils.isEmpty(mEditNameView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
+                    Bundle data = new Bundle();
                     String name = mEditNameView.getText().toString();
-                    replyIntent.putExtra(EXTRA_REPLY, name);
+                    String content = mEditTextView.getText().toString();
+                    data.putString("title", name);
+                    data.putString("content", content);
+                    replyIntent.putExtras(data);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();

@@ -73,4 +73,5 @@
     <string name="empty_not_saved">Note not saved because it is empty.</string>
     <string name="title_activity_new_pattern_note">NewPatternNote</string>
     <string name="title_activity_add_words_ui">AddWordsUI</string>
+    <string name="title_activity_show_note">ShowNote</string>
 </resources>

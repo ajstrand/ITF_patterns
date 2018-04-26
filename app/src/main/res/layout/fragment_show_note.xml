@@ -4,15 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.ajstrand.itf_patterns.AddWordsUI"
-    tools:showIn="@layout/activity_add_words_ui">
+    tools:context=".ShowNoteFragment"
+    tools:showIn="@layout/activity_show_note">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        tools:listitem="@layout/content_notes_list" />
+        android:id="@+id/test"/>
 
 </android.support.constraint.ConstraintLayout>
