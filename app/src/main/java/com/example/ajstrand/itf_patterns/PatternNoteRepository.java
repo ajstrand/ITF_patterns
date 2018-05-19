@@ -24,9 +24,17 @@ public class PatternNoteRepository {
        return patternNotes;
    }
 
+    PatternNote getPatterNote(int id){
+        return daoInstance.getNote(id);
+    }
+
    public void insert(PatternNote note){
        new insertAsyncTask(daoInstance).execute(note);
    }
+
+    public void update(PatternNote note) {
+        new updateAsyncTask(daoInstance).execute(note);
+    }
 
     private static class insertAsyncTask extends AsyncTask<PatternNote, Void, Void> {
 
@@ -39,6 +47,20 @@ public class PatternNoteRepository {
         @Override
         protected Void doInBackground(final PatternNote... patternNote) {
             mAsyncTaskDao.insert(patternNote[0]);
+            return null;
+        }
+    }
+
+    private class updateAsyncTask extends AsyncTask<PatternNote, Void, Void>  {
+        private PatternNoteDao mAsyncTaskDao;
+
+        public updateAsyncTask(PatternNoteDao daoInstance) {
+            mAsyncTaskDao = daoInstance;
+        }
+
+        @Override
+        protected Void doInBackground(final PatternNote... patternNote) {
+            mAsyncTaskDao.update(patternNote[0]);
             return null;
         }
     }

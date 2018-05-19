@@ -18,11 +18,21 @@ public class PatternNoteViewModel extends AndroidViewModel {
         super(application);
         mRep = new PatternNoteRepository(application);
         mPatternNotes = mRep.getPatterNotes();
+
     }
 
     LiveData<List<PatternNote>> getPatternNotes(){
         return mPatternNotes;
     }
 
-    public void insert(PatternNote word) { mRep.insert(word); }
+    PatternNote getPatternNote(int id){
+        return mRep.getPatterNote(id);
+    }
+
+
+    public void insert(PatternNote note) { mRep.insert(note); }
+
+    public void update(PatternNote note) {
+        mRep.update(note);
+    }
 }

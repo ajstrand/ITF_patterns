@@ -18,6 +18,9 @@ public interface PatternNoteDao {
     @Query("SELECT * FROM patternnote")
     LiveData<List<PatternNote>> getAllNotes();
 
+    @Query("SELECT * FROM patternnote WHERE id = :id")
+    PatternNote getNote(int id);
+
     @Insert
     void insert(PatternNote notes);
 
