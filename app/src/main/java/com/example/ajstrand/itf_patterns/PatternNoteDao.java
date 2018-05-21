@@ -25,7 +25,7 @@ public interface PatternNoteDao {
     void insert(PatternNote notes);
 
     @Update
-    void update(PatternNote... notes);
+    void update(PatternNote notes);
 
     @Delete
     void delete(PatternNote... notes);
