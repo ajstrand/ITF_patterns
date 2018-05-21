@@ -25,7 +25,8 @@ public class PatternNoteRepository {
    }
 
     PatternNote getPatterNote(int id){
-        return daoInstance.getNote(id);
+        PatternNote note = daoInstance.getNote(id);
+        return note;
     }
 
    public void insert(PatternNote note){

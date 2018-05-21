@@ -59,8 +59,9 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
                     setEditState(textView, editView, patternNote);
                 }
                 else {
-                    UpdatePatternNoteAsyncTask test = new UpdatePatternNoteAsyncTask(textID, mPatternViewModel, context);
-                    test.execute();
+                    String editViewText = String.valueOf(editView.getText());
+                    UpdatePatternNoteAsyncTask updateNoteContents = new UpdatePatternNoteAsyncTask(textID, mPatternViewModel, context, editViewText);
+                    updateNoteContents.execute();
                     editing = false;
                 }
             }
@@ -76,25 +77,28 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
 
     private static class UpdatePatternNoteAsyncTask extends AsyncTask<PatternNote, Void, Void> {
 
-        int textID;
+        int textIDToGet;
         Context myCon;
         boolean errorToShow = false;
-    PatternNoteViewModel test;
-        public UpdatePatternNoteAsyncTask(int textID, PatternNoteViewModel m, Context con){
-            this.textID = textID;
-            myCon = con;
+        PatternNoteViewModel noteViewModel;
+        String newText;
 
-            test = m;
+        public UpdatePatternNoteAsyncTask(int textID, PatternNoteViewModel viewmodel, Context con, String editViewText){
+            this.textIDToGet = textID;
+            myCon = con;
+            newText = editViewText;
+            noteViewModel = viewmodel;
         }
 
         @Override
         protected Void doInBackground(final PatternNote... patternNote) {
-            PatternNote noteToUpdate = test.getPatternNote(textID);
+            PatternNote noteToUpdate = noteViewModel.getPatternNote(textIDToGet);
             if(noteToUpdate == null){
                 errorToShow = true;
             }
             else {
-                test.update(noteToUpdate);
+                noteToUpdate.text = newText;
+                noteViewModel.update(noteToUpdate);
             }
             return null;
         }
@@ -103,8 +107,12 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if(errorToShow){
-                Toast errorMessage = Toast.makeText(myCon, "note is null", Toast.LENGTH_LONG);
+                Toast errorMessage = Toast.makeText(myCon, "an error occurred. note may be null or some other type of error", Toast.LENGTH_LONG);
                 errorMessage.show();
+            }
+            else {
+                Toast message = Toast.makeText(myCon, "note updated", Toast.LENGTH_LONG);
+                message.show();
             }
         }
     }

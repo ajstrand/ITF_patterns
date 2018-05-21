@@ -56,8 +56,8 @@ import android.content.Context;
             @Override
             protected Void doInBackground(final Void... params) {
                 mDao.deleteAll();
-                PatternNote note = new PatternNote(0, "test", "this is a note");
-                PatternNote second = new PatternNote(1, "foo", "bar");
+                PatternNote note = new PatternNote("test", "this is a note");
+                PatternNote second = new PatternNote("foo", "bar");
                 mDao.insert(note);
                 mDao.insert(second);
                 return null;

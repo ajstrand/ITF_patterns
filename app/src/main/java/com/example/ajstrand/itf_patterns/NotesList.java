@@ -35,13 +35,14 @@ public class NotesList extends RecyclerView.Adapter<NotesList.NoteViewHolder> {
     public void onBindViewHolder(final NotesList.NoteViewHolder holder, final int position) {
         if (mNotes != null) {
             PatternNote current = mNotes.get(position);
-            final String patternNoteText = current.text;
+            final String patternNoteText = current.getText();
+            final int patternNoteID = current.getID();
             holder.wordItemView.setText(current.name);
             holder.wordItemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Bundle data = new Bundle();
-                    data.putString("id", Integer.toString(position));
+                    data.putString("id", Integer.toString(patternNoteID));
                     data.putString("content", patternNoteText);
                     Context localContext = holder.wordItemView.getContext();
                     Intent intent = new Intent(localContext, ShowNote.class);

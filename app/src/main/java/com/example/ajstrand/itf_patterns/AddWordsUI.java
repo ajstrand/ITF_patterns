@@ -82,7 +82,7 @@ public class AddWordsUI<T extends ViewModel> extends AppCompatActivity implement
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_PATTERN_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            PatternNote word = new PatternNote(0, data.getStringExtra("title"), data.getStringExtra("content"));
+            PatternNote word = new PatternNote(data.getStringExtra("title"), data.getStringExtra("content"));
             mPatternViewModel.insert(word);
             Toast.makeText(getApplicationContext(), word.toString(), Toast.LENGTH_LONG).show();
         } else {

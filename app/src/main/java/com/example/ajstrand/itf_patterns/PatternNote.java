@@ -15,13 +15,12 @@ public class PatternNote {
     public String name;
     public String text;
 
-    PatternNote(int id, String name, String text) {
-        this.id = id;
+    PatternNote(String name, String text) {
         this.name = name;
         this.text = text;
     }
 
-    public int getID(){return this.id;}
+    public int getID(){return id;}
 
     public String getName() {
         return this.name;

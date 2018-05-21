@@ -26,7 +26,8 @@ public class PatternNoteViewModel extends AndroidViewModel {
     }
 
     PatternNote getPatternNote(int id){
-        return mRep.getPatterNote(id);
+        PatternNote note = mRep.getPatterNote(id);
+        return note;
     }
 
 
