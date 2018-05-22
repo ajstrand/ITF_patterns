@@ -74,4 +74,8 @@
     <string name="title_activity_new_pattern_note">NewPatternNote</string>
     <string name="title_activity_add_words_ui">AddWordsUI</string>
     <string name="title_activity_show_note">ShowNote</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="seeNotes">See Notes</string>
+    <string name="seePatterns">See Patterns</string>
+
 </resources>

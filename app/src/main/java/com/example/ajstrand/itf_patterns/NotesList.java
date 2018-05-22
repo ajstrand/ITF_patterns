@@ -25,6 +25,10 @@ public class NotesList extends RecyclerView.Adapter<NotesList.NoteViewHolder> {
     private List<PatternNote> mNotes; // Cached copy of words
     NotesList(Context context) { mInflater = LayoutInflater.from(context); }
 
+    public void NotesList(){
+
+    }
+
     @Override
     public NotesList.NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.content_notes_list, parent, false);
