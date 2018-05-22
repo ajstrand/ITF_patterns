@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.ajstrand.itf_patterns.NewPatternNote"
+    tools:showIn="@layout/activity_new_pattern_note">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_centerInParent="true"
+            android:id="@+id/edit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_note"
+            android:inputType="textAutoComplete"
+            android:padding="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:layout_marginTop="@dimen/big_padding"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_below="@id/edit_title"
+            android:layout_centerInParent="true"
+            android:id="@+id/edit_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_note"
+            android:inputType="textAutoComplete"
+            android:padding="@dimen/small_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:layout_marginTop="@dimen/big_padding"
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_above="@id/edit_title"
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/button_save"
+            android:textColor="@color/buttonLabel" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

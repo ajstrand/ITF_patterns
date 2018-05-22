@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.example.ajstrand.itf_patterns"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,35 +21,35 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:support-v4:25.4.0'
-    compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
-    compile 'com.android.support:support-vector-drawable:25.4.0'
+
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
     configurations.all {
         resolutionStrategy {
-            force 'com.android.support:appcompat-v7:25.+'
-            force 'com.android.support:support-compat:25.+'
-            force 'com.android.support:support-core-ui:25.+'
-            force 'com.android.support:support-annotations:25.+'
-            force 'com.android.support:recyclerview-v7:25.+'
+            force 'com.android.support:appcompat-v7:26.+'
+            force 'com.android.support:support-compat:26.+'
+            force 'com.android.support:support-core-ui:26.+'
+            force 'com.android.support:support-annotations:26.+'
+            force 'com.android.support:recyclerview-v7:26.+'
         }
     }
-
     // ...
     // Litho
-    implementation 'com.facebook.litho:litho-core:0.11.0'
-    implementation 'com.facebook.litho:litho-widget:0.11.0'
-    compileOnly 'com.facebook.litho:litho-annotations:0.11.0'
+    implementation 'com.facebook.litho:litho-core:0.12.0'
+    implementation 'com.facebook.litho:litho-widget:0.12.0'
+    compileOnly 'com.facebook.litho:litho-annotations:0.12.0'
 
-    annotationProcessor 'com.facebook.litho:litho-processor:0.11.0'
+    annotationProcessor 'com.facebook.litho:litho-processor:0.12.0'
 
     // SoLoader
     implementation 'com.facebook.soloader:soloader:0.2.0'
@@ -66,4 +66,14 @@ dependencies {
     compileOnly 'com.facebook.litho:litho-sections-annotations:0.12.0'
 
     annotationProcessor 'com.facebook.litho:litho-sections-processor:0.12.0'
+    compile 'com.android.support:support-annotations:27.1.0'
+
+    // Room (use 1.1.0-alpha3 for latest alpha)
+    implementation "android.arch.persistence.room:runtime:1.1.0-alpha3"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.0-alpha3"
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 }

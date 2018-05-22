@@ -15,11 +15,6 @@
             android:name=".PatternListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".PatternDetailActivity"
@@ -54,7 +49,38 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Rec_Adapter" />
+        <activity
+            android:name=".NotesList"
+            android:label="@string/title_activity_notes_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewPatternNote"
+            android:label="@string/title_activity_new_pattern_note"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddWordsUI"
+            android:label="@string/title_activity_add_words_ui"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ShowNote"
+            android:label="@string/title_activity_show_note"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomeScreen"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
