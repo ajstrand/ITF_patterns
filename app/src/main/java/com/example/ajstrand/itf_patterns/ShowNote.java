@@ -28,6 +28,15 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
 
     Context context = this;
 
+    TextView textView;
+    EditText editView;
+    TextView titleView;
+    EditText titleEditView;
+
+    String patternNoteTitle;
+    String patternNote;
+    String patternNoteID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,32 +44,39 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-
-        final String patternNote = intent.getStringExtra("content");
-
-        String idFromBundle = intent.getStringExtra("id");
-        textID = Integer.parseInt((idFromBundle));
-
-        final TextView textView = findViewById(R.id.noteText);
-
-        final EditText editView = findViewById(R.id.noteEdit);
-
-        textView.setText(patternNote);
-
         final PatternNoteViewModel mPatternViewModel = ViewModelProviders.of(this).get(PatternNoteViewModel.class);
 
+
+        Intent intent = getIntent();
+
+        patternNoteTitle = intent.getStringExtra("title");
+
+        patternNote = intent.getStringExtra("content");
+
+        patternNoteID = intent.getStringExtra("id");
+        textID = Integer.parseInt((patternNoteID));
+
+        textView = findViewById(R.id.noteText);
+
+        editView = findViewById(R.id.noteEdit);
+
+        titleView = findViewById(R.id.noteTitle);
+
+        titleEditView = findViewById(R.id.titleEdit);
+        textView.setText(patternNote);
+        titleView.setText(patternNoteTitle);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!editing){
-                    setEditState(textView, editView, patternNote);
+                    setEditState();
                 }
                 else {
                     String editViewText = String.valueOf(editView.getText());
-                    UpdatePatternNoteAsyncTask updateNoteContents = new UpdatePatternNoteAsyncTask(textID, mPatternViewModel, context, editViewText);
+                    String titleEditText = String.valueOf(titleEditView.getText());
+                    UpdatePatternNoteAsyncTask updateNoteContents = new UpdatePatternNoteAsyncTask(textID, mPatternViewModel, context, editViewText, titleEditText);
                     updateNoteContents.execute();
                     editing = false;
                 }
@@ -68,11 +84,14 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
         });
     }
 
-    public void setEditState(TextView textView, EditText editView, String patternNote){
+    public void setEditState(){
         editing = true;
         editView.setVisibility(View.VISIBLE);
         textView.setVisibility(View.INVISIBLE);
+        titleEditView.setVisibility(View.VISIBLE);
+        titleView.setVisibility(View.INVISIBLE);
         editView.setText(patternNote);
+        titleEditView.setText(patternNoteTitle);
     }
 
     private static class UpdatePatternNoteAsyncTask extends AsyncTask<PatternNote, Void, Void> {
@@ -81,15 +100,17 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
         Context myCon;
         boolean errorToShow = false;
         PatternNoteViewModel noteViewModel;
-        String newText;
+        String patternNoteText;
+        String patternNoteTitleText;
 
-        public UpdatePatternNoteAsyncTask(int textID, PatternNoteViewModel viewmodel, Context con, String editViewText){
+        public UpdatePatternNoteAsyncTask(int textID, PatternNoteViewModel viewmodel, Context con, String editViewText, String titleEditText) {
             this.textIDToGet = textID;
             myCon = con;
-            newText = editViewText;
+            patternNoteText = editViewText;
             noteViewModel = viewmodel;
-        }
+            patternNoteTitleText = titleEditText;
 
+        }
         @Override
         protected Void doInBackground(final PatternNote... patternNote) {
             PatternNote noteToUpdate = noteViewModel.getPatternNote(textIDToGet);
@@ -97,7 +118,8 @@ public class ShowNote <T extends ViewModel> extends AppCompatActivity implements
                 errorToShow = true;
             }
             else {
-                noteToUpdate.text = newText;
+                noteToUpdate.text = patternNoteText;
+                noteToUpdate.name = patternNoteTitleText;
                 noteViewModel.update(noteToUpdate);
             }
             return null;
