@@ -21,20 +21,23 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.ajstrand.itf_patterns.NotificationPublisher.NOTIFICATION_CHANNEL_ID;
+
 /**
- * A placeholder fragment containing a simple view.
+ * A fragment for sending notifications
  */
 public class CreateNotificationDetailsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 
     Context context;
 
+    Class<NotificationPublisher> np = NotificationPublisher.class;
+
     List<ITF_Pattern.PatternItem> foo = ITF_Pattern.ITEMS;
 
     ArrayList<String> fooBar = new ArrayList<>();
 
     String note, pattern_name;
-
 
     /**
      * @method sendNotification
@@ -46,7 +49,7 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
     }
 
     private void scheduleNotification(Notification notification, int delay) {
-        Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+        Intent notificationIntent = new Intent(context, np);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -60,23 +63,23 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
         if (context == null) {
             throw new Error("context is null, please check the value " + content);
         } else {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
             builder.setContentTitle("Scheduled Notification");
             builder.setContentText(content);
             builder.setSmallIcon(R.drawable.ic_launcher);
+            builder.setChannelId(NOTIFICATION_CHANNEL_ID);
             return builder.build();
         }
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_create_notification_details, container, false);
+        View local_view = inflater.inflate(R.layout.fragment_create_notification_details, container, false);
         Button testButton;
-        testButton = (Button) v.findViewById(R.id.myid);
+        testButton = local_view.findViewById(R.id.myid);
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,21 +87,25 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
             }
         });
 
+        createSpinner(local_view);
+        return local_view;
+    }
+
+    private void createSpinner(View local_view) {
         for (int i = 0; i < foo.size(); i++) {
             ITF_Pattern.PatternItem test = foo.get(i);
             fooBar.add(test.title);
         }
 
-        Spinner spinner = (Spinner) v.findViewById(R.id.my_spinner);
+        Spinner spinner = local_view.findViewById(R.id.my_spinner);
         spinner.setOnItemSelectedListener(this);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter;
-        adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, fooBar);
-// Specify the layout to use when the list of choices appears
+        adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, fooBar);
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        return v;
     }
 
     public void onAttach(Context con) {
@@ -110,8 +117,6 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
                                int pos, long id) {
         note = "dont forget to pratice " + parent.getItemAtPosition(pos).toString();
         pattern_name = parent.getItemAtPosition(pos).toString();
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
     }
 
     public void onNothingSelected(AdapterView<?> parent) {

@@ -77,5 +77,7 @@
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="seeNotes">See Notes</string>
     <string name="seePatterns">See Patterns</string>
+    <string name="titleLabel">Title</string>
+    <string name="contentLabel">Content</string>
 
 </resources>
