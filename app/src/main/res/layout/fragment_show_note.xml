@@ -1,40 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShowNoteFragment"
     tools:showIn="@layout/activity_show_note">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:id="@+id/titleEdit"
+            android:inputType="text"
+            android:gravity="center"
             android:visibility="invisible"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/noteTitle" />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/titleLabel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/titleLabel"
+        android:textSize="19sp" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/noteTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_below="@id/titleLabel"
+        android:textSize="22sp" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:inputType="text"
             android:id="@+id/noteEdit"
             android:visibility="invisible"
+            android:gravity="center"
             android:layout_below="@+id/noteTitle"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/contentLabel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/contentLabel"
+        android:layout_below="@id/noteTitle"
+        android:textSize="19sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:textSize="22sp"
+            android:gravity="center"
             android:id="@+id/noteText"
-            android:layout_below="@+id/noteTitle" />
+            android:layout_below="@+id/contentLabel" />
 
-    </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
