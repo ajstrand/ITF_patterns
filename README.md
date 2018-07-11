@@ -7,4 +7,4 @@ The main list view of the app uses [Litho](https://fblitho.com/), a declaritive 
 I think the framework is interesting and makes development simpler (from a programing model point of view), but I think the framework 
 has a ways to go. 
 
-still in development. 
+Users can also create and edit notes to help them when learning specific tecniques or patterns. 
