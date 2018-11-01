@@ -79,7 +79,7 @@ public class CreateNotificationDetailsFragment extends Fragment implements Adapt
         // Inflate the layout for this fragment
         View local_view = inflater.inflate(R.layout.fragment_create_notification_details, container, false);
         Button testButton;
-        testButton = local_view.findViewById(R.id.myid);
+        testButton = local_view.findViewById(R.id.sendPatternNotification);
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,43 +1,18 @@
 package com.example.ajstrand.itf_patterns;
 
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatDelegate;
-import android.widget.Switch;
-import android.widget.CompoundButton;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 
-import com.example.ajstrand.itf_patterns.ITF_Pattern;
-import com.facebook.litho.Component;
-import com.facebook.litho.ComponentContext;
-import com.facebook.litho.LithoView;
-import com.facebook.litho.sections.SectionContext;
-import com.facebook.litho.sections.widget.RecyclerCollectionComponent;
-import com.facebook.litho.widget.LithoRecylerView;
-import com.facebook.soloader.SoLoader;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An activity representing a list of Patterns. This activity
@@ -59,6 +34,7 @@ public class PatternListActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_DARK_THEME = "dark_theme";
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,26 +53,17 @@ public class PatternListActivity extends AppCompatActivity {
             setTheme(R.style.AppTheme_NoActionBar);
         }
 
-        SoLoader.init(this, false);
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
         final Context context = getApplicationContext();
 
-
-
-        ParseJson task = new ParseJson(context);
+        ParseJson task = new ParseJson(context, this);
         task.execute();
-
-        /*View recyclerView = findViewById(R.id.pattern_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);*/
 
         if (findViewById(R.id.pattern_detail_container) != null) {
             // The detail container view will be present only in the
@@ -105,16 +72,11 @@ public class PatternListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
-        final ComponentContext newCont = new ComponentContext(this);
+    }
 
-        final Component component = RecyclerCollectionComponent.create(newCont)
-                .disablePTR(true)
-                .section(PatternSection.create(new SectionContext(context))
-                        .twoPane(mTwoPane)
-                        .manage(passValue)
-                        .build())
-                .build();
-        setContentView(LithoView.create(context, component));
+    protected void start() {
+        recyclerView = findViewById(R.id.pattern_list);
+        setupRecyclerView(recyclerView);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

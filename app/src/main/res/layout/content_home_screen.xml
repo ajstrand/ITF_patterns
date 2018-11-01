@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,20 +10,22 @@
     tools:context=".HomeScreen"
     tools:showIn="@layout/activity_home_screen">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <TextView
+            android:text="@string/select_one_of_the_two_options_below"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+        </TextView>
+
         <Button
-            android:layout_width="200dp"
-            android:layout_height="50dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:text="@string/seePatterns"
             android:id="@+id/seePatterns"/>
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="@string/seeNotes"
-            android:id="@+id/seeNotes"
-            android:layout_below="@+id/seePatterns"/>
-    </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/seeNotes"
+            android:id="@+id/seeNotes" />
+
+</LinearLayout>
