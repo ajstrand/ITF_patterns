@@ -43,37 +43,13 @@ dependencies {
             force 'com.android.support:recyclerview-v7:26.+'
         }
     }
-    // ...
-    // Litho
-    implementation 'com.facebook.litho:litho-core:0.12.0'
-    implementation 'com.facebook.litho:litho-widget:0.12.0'
-    compileOnly 'com.facebook.litho:litho-annotations:0.12.0'
-
-    annotationProcessor 'com.facebook.litho:litho-processor:0.12.0'
-
-    // SoLoader
-    implementation 'com.facebook.soloader:soloader:0.2.0'
-
-    // For integration with Fresco
-    implementation 'com.facebook.litho:litho-fresco:0.11.0'
-
-    // For testing
-    testImplementation 'com.facebook.litho:litho-testing:0.11.0'
-
-    // Sections
-    implementation 'com.facebook.litho:litho-sections-core:0.12.0'
-    implementation 'com.facebook.litho:litho-sections-widget:0.12.0'
-    compileOnly 'com.facebook.litho:litho-sections-annotations:0.12.0'
-
-    annotationProcessor 'com.facebook.litho:litho-sections-processor:0.12.0'
-    compile 'com.android.support:support-annotations:27.1.0'
 
     // Room (use 1.1.0-alpha3 for latest alpha)
-    implementation "android.arch.persistence.room:runtime:1.1.0-alpha3"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.0-alpha3"
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 
     // ViewModel and LiveData
-    implementation "android.arch.lifecycle:extensions:1.1.0"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 }
