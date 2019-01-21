@@ -7,7 +7,9 @@
     tools:showIn="@layout/activity_show_note">
 
         <EditText
-            android:layout_width="match_parent"
+            android:hint="Edit title"
+            android:layout_width="340dp"
+            android:layout_centerInParent="true"
             android:layout_height="40dp"
             android:id="@+id/titleEdit"
             android:inputType="text"
@@ -33,7 +35,9 @@
         android:textSize="22sp" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:hint="Edit note content"
+            android:layout_width="340dp"
+            android:layout_centerInParent="true"
             android:layout_height="40dp"
             android:inputType="text"
             android:id="@+id/noteEdit"

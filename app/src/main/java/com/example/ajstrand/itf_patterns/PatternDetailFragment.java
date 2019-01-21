@@ -55,11 +55,6 @@ public class PatternDetailFragment extends Fragment {
 
         Activity activity = this.getActivity();
 
-
-
-
-
-
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             Bundle test = activity.getIntent().getExtras();
 

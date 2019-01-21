@@ -1,33 +1,32 @@
 <resources>
-    <string name="app_name">ITF_patterns</string>
-    <string name="title_pattern_detail">Pattern Detail</string>
+    <string name="app_name">ITF Taekwondo Patterns Review</string>
+    <string name="title_pattern_detail">Pattern Steps</string>
     <string name="title_activity_settings">Settings</string>
 
 
     <string name="sendNotification">Send Notification from my phone</string>
 
-    <string name="title_activity_switch_theme">SwitchTheme</string>
+    <string name="title_activity_switch_theme">Switch Theme/Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_create_notification_details">CreateNotificationDetails</string>
-    <string name="title_activity_litho_test">LithoTest</string>
+    <string name="title_activity_create_notification_details">Create a reminder notification</string>
     <string name="title_activity_room_test">RoomTest</string>
     <string name="title_activity_notes_list">NotesList</string>
 
     <string name="hint_note">Pattern Note</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Note not saved because it is empty.</string>
-    <string name="title_activity_new_pattern_note">NewPatternNote</string>
-    <string name="title_activity_add_words_ui">AddWordsUI</string>
-    <string name="title_activity_show_note">ShowNote</string>
-    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_new_pattern_note">Untitled Note</string>
+    <string name="title_activity_add_words_ui">List of all notes you\'ve created</string>
+    <string name="title_activity_show_note">Saved note details</string>
+    <string name="title_activity_home_screen">Select an option</string>
     <string name="seeNotes">See Notes about patterns that you\'ve created</string>
     <string name="seePatterns">See Patterns and view steps for an individual pattern</string>
     <string name="titleLabel">Title</string>
     <string name="contentLabel">Content</string>
     <string name="select_one_of_the_two_options_below">Select one of the options below</string>
+    <string name="hint_note_title">Adda title here</string>
+    <string name="hint_note_content">Add content here</string>
 
 </resources>

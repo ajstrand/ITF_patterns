@@ -44,7 +44,8 @@ public class ITF_Pattern {
 
     protected static String createStepsDetails(JSONObject stepsObj)  {
         StringBuilder builder = new StringBuilder();
-        builder.append("\nDetails about the pattern:\n");
+        String startMessage = "\nDetails about the pattern:\n";
+        builder.append(startMessage);
 
         Iterator<String> iter = stepsObj.keys();
 
@@ -52,7 +53,8 @@ public class ITF_Pattern {
             String key = iter.next();
             try {
                 Object value = stepsObj.get(key);
-                builder.append(value+"\n");
+                String stepToInsert = value+"\n";
+                builder.append(stepToInsert);
 
             }
             catch(JSONException e){
